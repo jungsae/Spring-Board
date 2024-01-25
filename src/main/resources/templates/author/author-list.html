@@ -1,0 +1,67 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--&lt;!&ndash;    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">&ndash;&gt;-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+<!--    <title>AuthorList</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <div th:replace="header :: headerFragment"></div>-->
+
+<!--    <div class="container">-->
+<!--        <div class="page-header"><h1>회원 목록</h1></div>-->
+<!--        <table class="table">-->
+<!--            <thead>-->
+<!--                <tr>-->
+<!--                    <th>id</th>-->
+<!--                    <th>이름</th>-->
+<!--                    <th>이메일</th>-->
+<!--                    <th> </th>-->
+<!--                </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--                <tr th:each="author : ${authorList}">-->
+<!--                    <td th:text="${author.id}"></td>-->
+<!--                    <td th:text="${author.name}"></td>-->
+<!--                    <td th:text="${author.email}"></td>-->
+<!--                    <td><a th:href="@{|/author/detail/${author.id}|}">상세보기</a></td>-->
+<!--                </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Author List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body class="bg-gray-100">
+<div th:replace="header :: headerFragment"></div>
+<div class="container mx-auto mt-40 p-6 bg-white rounded-lg shadow-md">
+    <table class="min-w-full table-auto border-collapse">
+        <thead>
+        <tr class="text-left bg-gray-200">
+            <th class="px-4 py-2 border-b-2 border-gray-300">Name</th>
+            <th class="px-4 py-2 border-b-2 border-gray-300">Email</th>
+            <th class="px-4 py-2 border-b-2 border-gray-300">상세보기</th>
+        </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-300">
+        <tr th:each="author: ${authorList}" class="hover:bg-sky-200">
+            <td class="px-4 py-2" th:text="${author.name}"></td>
+            <td class="px-4 py-2" th:text="${author.email}"></td>
+            <td class="px-4 py-2">
+                <a class="text-blue-600 hover:text-blue-800" th:href="@{|/author/detail/${author.id}|}">선택!</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

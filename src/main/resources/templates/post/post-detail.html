@@ -1,0 +1,318 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            background-color: #FFBE98;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--        }-->
+
+<!--        .container {-->
+<!--            max-width: 800px;-->
+<!--            margin: 0 auto;-->
+<!--            padding: 20px;-->
+<!--            background-color: #ffffff;-->
+<!--            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);-->
+<!--            border-radius: 5px;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        h2 {-->
+<!--            color: #333;-->
+<!--        }-->
+
+<!--        table {-->
+<!--            width: 100%;-->
+<!--            border-collapse: collapse;-->
+<!--            margin-top: 20px;-->
+<!--        }-->
+
+<!--        table, th, td {-->
+<!--            border: 1px solid #ccc;-->
+<!--        }-->
+
+<!--        th, td {-->
+<!--            padding: 10px;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        th {-->
+<!--            background-color: #007bff;-->
+<!--            color: #ffffff;-->
+<!--        }-->
+
+<!--        tr:nth-child(even) {-->
+<!--            background-color: #f2f2f2;-->
+<!--        }-->
+<!--    </style>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+<!--&lt;!&ndash;    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">&ndash;&gt;-->
+<!--    <title>AuthorDetail</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <div th:replace="header :: headerFragment"></div>-->
+<!--    <div class="container">-->
+<!--        <table class="table">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>이름</th>-->
+<!--                <th>이메일</th>-->
+<!--                <th>비밀번호</th>-->
+<!--                <th>가입시간</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr>-->
+<!--                <td th:text="${authorDetail.name}"></td>-->
+<!--                <td th:text="${authorDetail.email}"></td>-->
+<!--                <td th:text="${authorDetail.password}"></td>-->
+<!--                <td th:text="${authorDetail.create_time}"></td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--        <div class="container">-->
+<!--            <button onclick="showEditForm()" type="button" class="btn btn-info">수정</button>-->
+<!--            <button type="button" class="btn btn-danger"><a th:href="@{|/author/delete(id=${authorDetail.id})|}">삭제</a></button>-->
+<!--            <form id="editForm" action="/author/update" method="POST" style="display: none;">-->
+<!--                <h1>수정 정보 입력</h1>-->
+<!--                <p>ID : <input id="id" type="text" name="id" th:value="${authorDetail.id}" readonly></p>-->
+<!--                <p>이름 : <input id="name" type="text" name="name" th:value="${authorDetail.name}" readonly></p>-->
+<!--                <p>이메일 : <input id="email" type="text" name="email" th:value="${authorDetail.email}"></p>-->
+<!--                <p>비밀번호 : <input id="password" type="password" name="password" th:value="${authorDetail.password}" readonly></p>-->
+<!--                <p><button type="submit" class="btn btn-info">수정완료</button></p>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</body>-->
+<!--<script>-->
+<!--    function showEditForm() {-->
+<!--        let editForm = document.getElementById("editForm");-->
+<!--        editForm.style.display = "block";-->
+<!--    }-->
+<!--    document.getElementById("editForm").addEventListener("submit",  () => {-->
+<!--        location.reload();-->
+<!--    });-->
+<!--</script>-->
+<!--</html>-->
+
+<!--&lt;!&ndash;강사님 디자인&ndash;&gt;-->
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html xmlns:th="http://www.thymeleaf.org">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <style>&ndash;&gt;-->
+<!--&lt;!&ndash;        /* 스타일 코드는 그대로 둡니다. */&ndash;&gt;-->
+<!--&lt;!&ndash;    </style>&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
+<!--&lt;!&ndash;    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>AuthorDetail</title>&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;<div th:replace="header :: headerFragment"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="container">&ndash;&gt;-->
+<!--&lt;!&ndash;    <h1>회원 상세 정보</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;    <table class="table">&ndash;&gt;-->
+<!--&lt;!&ndash;        <tbody>&ndash;&gt;-->
+<!--&lt;!&ndash;        <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;            <th>ID</th>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:text="${authorDetail.id}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;        </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;        <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;            <th>이름</th>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:text="${authorDetail.name}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;        </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;        <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;            <th>이메일</th>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:text="${authorDetail.email}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;        </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;        <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;            <th>비밀번호</th>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:text="${authorDetail.password}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;        </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;        <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;            <th>가입시간</th>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:text="${authorDetail.create_time}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;        </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;        </tbody>&ndash;&gt;-->
+<!--&lt;!&ndash;    </table>&ndash;&gt;-->
+<!--&lt;!&ndash;    <button onclick="showEditForm()">수정</button>&ndash;&gt;-->
+<!--&lt;!&ndash;    <button><a th:href="@{|/author/delete(id=${authorDetail.id})|}">삭제</a></button>&ndash;&gt;-->
+<!--&lt;!&ndash;    <form id="editForm" action="/author/update" method="POST" style="display: none;">&ndash;&gt;-->
+<!--&lt;!&ndash;        <h1>수정 정보 입력</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p>ID : <input id="id" type="text" name="id" th:value="${authorDetail.id}" readonly></p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p>이름 : <input id="name" type="text" name="name" th:value="${authorDetail.name}" readonly></p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p>이메일 : <input id="email" type="text" name="email" th:value="${authorDetail.email}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p>비밀번호 : <input id="password" type="password" name="password" th:value="${authorDetail.password}" readonly></p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p><button type="submit">수정완료</button></p>&ndash;&gt;-->
+<!--&lt;!&ndash;    </form>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;<script>&ndash;&gt;-->
+<!--&lt;!&ndash;    function showEditForm() {&ndash;&gt;-->
+<!--&lt;!&ndash;        let editForm = document.getElementById("editForm");&ndash;&gt;-->
+<!--&lt;!&ndash;        editForm.style.display = "block";&ndash;&gt;-->
+<!--&lt;!&ndash;    }&ndash;&gt;-->
+<!--&lt;!&ndash;    document.getElementById("editForm").addEventListener("submit",  () => {&ndash;&gt;-->
+<!--&lt;!&ndash;        location.reload();&ndash;&gt;-->
+<!--&lt;!&ndash;    });&ndash;&gt;-->
+<!--&lt;!&ndash;</script>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
+
+<!DOCTYPE html>
+<<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Post Detail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0);
+            z-index: 1000;
+            overflow: auto;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .modal.show {
+            transform: translateX(0);
+            display: block;
+        }
+        .modal-content {
+            background-color: white;
+            margin: 20% auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            width: 60%;
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            font-size: 24px;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .modal-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+
+</head>
+<body class="bg-gray-100">
+<div th:replace="header :: headerFragment"></div>
+<div class="container mx-auto mt-40 p-6 bg-white rounded-lg shadow-md">
+    <div class="page-header mb-6">
+        <h1 class="text-2xl font-bold text-gray-800">게시글 상세 보기</h1>
+    </div>
+    <table class="table-auto w-full">
+        <tbody class="text-gray-700">
+        <tr class="border-b">
+            <td class="px-4 py-2 font-medium">ID</td>
+            <td class="px-4 py-2" th:text="${postDetail.id}"></td>
+        </tr>
+        <tr class="border-b bg-gray-50">
+            <td class="px-4 py-2 font-medium">제목</td>
+            <td style="white-space: pre-wrap;" class="px-4 py-2" th:text="${postDetail.title}"></td>
+        </tr>
+        <tr class="border-b">
+            <td class="px-4 py-2 font-medium">내용</td>
+            <td class="px-4 py-2" th:text="${postDetail.contents}"></td>
+        </tr>
+        <tr class="border-b">
+            <td class="px-4 py-2 font-medium">등록일시</td>
+            <td class="px-4 py-2" th:text="${postDetail.create_time}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="flex justify-end space-x-4 mt-6">
+        <button id="editBtn" class="px-4 py-2 bg-amber-400 text-white font-semibold rounded hover:bg-amber-600"
+                onclick="edit()">내용 수정
+        </button>
+        <a class="px-4 py-2 bg-violet-400 text-white font-semibold rounded hover:bg-violet-600"
+           th:href="@{|/post/delete/${postDetail.id}|}">
+            글 삭제
+        </a>
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <form th:action="@{|/post/update/${postDetail.id}|}" method="post">
+                <!--            <form action="/author/update" method="post">-->
+                <div class="modal-header">
+                    <h3 class="border-b bg-gray-50">게시글 정보 수정</h3>
+                </div>
+                <div class="modal-body">
+                    <!--                    <div class="form-group">-->
+                    <!--                        <label for="id">ID</label>-->
+                    <!--                        <input type="text" id="id" name="id" th:value="${authorDetail.id}" readonly>-->
+                    <!--                    </div>-->
+                    <div class="form-group">
+                        <label for="title">제목</label>
+                        <input type="text" id="title" name="title" th:value="${postDetail.title}">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">내용</label>
+                        <textarea input id="contents" name="contents" style="width: 250px; height: 300px; margin-right: 100px" th:text="${postDetail.contents}"> </textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="변경사항 저장" class="px-4 py-2 bg-rose-200 text-white font-semibold rounded hover:bg-rose-600">
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<script>
+    function edit() {
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("editBtn");
+        btn.onclick = function () {
+            modal.style.display = "block";
+            setTimeout(function () {
+                modal.classList.add("show");
+            }, 10);
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.classList.remove("show");
+                setTimeout(function () {
+                    modal.style.display = "none";
+                }, 300);
+            }
+        }
+    }
+</script>
+</body>
+</html>
