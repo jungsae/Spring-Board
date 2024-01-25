@@ -1,5 +1,9 @@
 package com.encore.board.author.repository;
 
+import com.encore.board.author.domian.Author;
+import com.encore.board.author.domian.Role;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 //DataJpaTest 어노테이션을 사용하면 매 테스트가 종료되면 자동으로 디비 원상복구
@@ -10,5 +14,22 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class AuthorRepositoryTest
 {
+    @Autowired
+    private AuthorRepository authorRepository;
+
+    @Test
+    public void authorSaveTest()
+    {
+//        객체를 만들어서 save -> 재조회해서 -> 만든 객체와 비교
+        Author author = Author.builder()
+                .email("test@gmail.com")
+                .name("test")
+                .password("1234")
+                .role(Role.ROLE_ADMIN)
+                .build();
+
+        authorRepository.save(author);
+    }
+
 
 }

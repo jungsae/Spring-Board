@@ -27,7 +27,7 @@ public class AuthorService
     public void saveReqDto(AuthorSaveReqDto authorSaveReqDto)
     {
         Role role = null;
-        if (authorSaveReqDto.getRole() == null || authorSaveReqDto.getRole().equals("user"))
+        if (authorSaveReqDto.getRole() == null || authorSaveReqDto.getRole().equals("ROLE_USER"))
             role = Role.ROLE_USER;
         else
             role = Role.ROLE_ADMIN;
