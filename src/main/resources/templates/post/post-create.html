@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Post-Create</title>
     <style>
         body {
@@ -62,8 +64,16 @@
     <form action="/post/create" method="POST">
         <h1>글쓰기</h1>
         <p>제목 <input id="title" type="text" name="title"></p>
-        <textarea input id="contents" name="contents" style="width: 1100px; height: 300px; margin-right: 100px"> 내용</textarea>
+        <label for="contents">내용</label>
+        <textarea input id="contents" name="contents" style="width: 1100px; height: 300px; margin-right: 100px"> </textarea>
         <p>이메일 <input id="email" type="text" name="email"></p>
+        <input type="datetime-local" id="appointmentTime" name="appointmentTime">
+        <p aria-required="true">예약(Y/N):
+            <input type="radio" id="appointmentY" name="appointment" value=Y>
+            <label for="appointmentY">Y</label>
+            <input type="radio" id="appointmentN" name="appointment" value=N>
+            <label for="appointmentN">N</label>
+        </p>
         <p><button type="submit">등록하기</button></p>
     </form>
 </div>

@@ -25,11 +25,11 @@ public class Post
     private String title;
     @Column(length = 3000, nullable = false)
     private String contents;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private Author author;
-
+    private String appointment;
+    private LocalDateTime appointmentTime;
     @CreationTimestamp
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     LocalDateTime create_Time;

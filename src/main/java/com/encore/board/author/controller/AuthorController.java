@@ -8,10 +8,7 @@ import com.encore.board.author.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -93,6 +90,7 @@ public class AuthorController
 
     @GetMapping("/author/{id}/circle/dto")
     @ResponseBody
+    @CrossOrigin(origins = "*") // 특정 컨트롤러에 대한 CORS 설정
     public AuthorDetailResDto circleIssueTest2(@PathVariable Long id)
     {
         return authorService.findAuthorDetail(id);

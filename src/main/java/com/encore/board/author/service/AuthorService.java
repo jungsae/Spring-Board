@@ -26,12 +26,13 @@ public class AuthorService
 
     public void saveReqDto(AuthorSaveReqDto authorSaveReqDto)
     {
+        System.out.println("체[크: " + authorSaveReqDto);
         Role role = null;
         if (authorSaveReqDto.getRole() == null || authorSaveReqDto.getRole().equals("ROLE_USER"))
             role = Role.ROLE_USER;
         else
             role = Role.ROLE_ADMIN;
-
+        System.out.println(role);
 //        일반 생성자 방식
 //        Author author = new Author(
 //                authorSaveReqDto.getName(),
@@ -44,6 +45,7 @@ public class AuthorService
                 .name(authorSaveReqDto.getName())
                 .email(authorSaveReqDto.getEmail())
                 .password(authorSaveReqDto.getPassword())
+                .role(role)
                 .build();
 
         authorRepository.save(author);

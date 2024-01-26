@@ -1,14 +1,20 @@
 package com.encore.board.post.controller;
 
+import com.encore.board.post.dto.PostListResDto;
 import com.encore.board.post.dto.PostSaveReqDto;
 import com.encore.board.post.dto.PostUpdateReqDto;
 import com.encore.board.post.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class PostController
@@ -37,17 +43,28 @@ public class PostController
     @PostMapping("/post/create")
     public String posting(PostSaveReqDto postSaveReqDto)
     {
+        System.out.println(postSaveReqDto);
 //        return postService.posting(postSaveReqDto);
         postService.posting(postSaveReqDto);
         return "redirect:/posts";
     }
 
     @GetMapping("/posts")
-    public String postList(Model model)
+    public String postList(Model model,@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable)
     {
-        model.addAttribute("postList", postService.findAll());
+//        Page<PostListResDto> postListResDtos = postService.findAll(pageable);
+        model.addAttribute("postList", postService.findByAppointment(pageable));
 //        return postService.findAll();
         return "/post/post-list";
+    }
+
+    @GetMapping("/json/posts")
+//    localhost:8080/json/posts?size=20&page=3&sort=xx,desc
+    @ResponseBody
+    public Page<PostListResDto> postList(Pageable pageable)
+    {
+        Page<PostListResDto> postListResDtos = postService.findAllJson(pageable);
+        return postListResDtos;
     }
 
     @PostMapping("/post/update/{id}")
