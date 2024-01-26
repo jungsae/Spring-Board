@@ -48,4 +48,9 @@ public class Post
         this.title= title;
         this.contents = contents;
     }
+
+    public void updateAppointment(String appointment)
+    {
+        this.appointment = appointment;
+    }
 }

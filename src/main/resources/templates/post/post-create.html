@@ -75,7 +75,15 @@
             <label for="appointmentN">N</label>
         </p>
         <p><button type="submit">등록하기</button></p>
+        <div th:if="${errorMessage != null}">
+            <input type="hidden" id="error" th:value="${errorMessage}">
+        </div>
     </form>
+    <script>
+        let errorMessage = document.getElementById("error").value;
+        if (errorMessage)
+            alert(errorMessage);
+    </script>
 </div>
 </body>
 </html>

@@ -35,15 +35,23 @@ public class PostController
     }
 
     @GetMapping("/post/create")
-    public String posting()
+    public String posting(Model model, PostSaveReqDto postSaveReqDto)
     {
-        return "/post/post-create";
+        try
+        {
+            postService.posting(postSaveReqDto);
+            return "redirect:/posts";
+        }catch(IllegalArgumentException e){
+            model.addAttribute("errorMessage", e.getMessage());
+            return "/post/post-create";
+        }
+
     }
 
     @PostMapping("/post/create")
     public String posting(PostSaveReqDto postSaveReqDto)
     {
-        System.out.println(postSaveReqDto);
+        System.out.println("컨트롤러: " + postSaveReqDto);
 //        return postService.posting(postSaveReqDto);
         postService.posting(postSaveReqDto);
         return "redirect:/posts";

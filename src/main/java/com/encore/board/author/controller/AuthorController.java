@@ -41,10 +41,17 @@ public class AuthorController
     }
 
     @PostMapping("/author/create")
-    public String saveReqDto(AuthorSaveReqDto authorSaveReqDto)
+    public String saveReqDto(Model model, AuthorSaveReqDto authorSaveReqDto)
     {
-        authorService.saveReqDto(authorSaveReqDto);
-        return "redirect:/author/list";
+        try
+        {
+            authorService.saveReqDto(authorSaveReqDto);
+            return "redirect:/author/list";
+        }catch(IllegalArgumentException e)
+        {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "/author/author-create";
+        }
     }
 
     @GetMapping("author/detail/{id}")

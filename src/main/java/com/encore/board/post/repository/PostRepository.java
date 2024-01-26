@@ -24,6 +24,8 @@ public interface PostRepository extends JpaRepository<Post, Long>
     List<Post> findAllJoin();
     @Query("select p from Post p left join fetch p.author") //jpql문
     List<Post> findAllFetchJoin();
+
+    Page<Post> findByAppointment(String appointment, Pageable pageable);
 //    @Query("select p from Post p where p.appointMent = 'N'")
 //    List<Post> findAllByNotAppointMent();
 }
