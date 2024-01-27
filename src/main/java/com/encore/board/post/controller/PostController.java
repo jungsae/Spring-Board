@@ -11,10 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class PostController
@@ -34,7 +31,7 @@ public class PostController
         return "/post/post-detail";
     }
 
-    @GetMapping("/post/create")
+    @PostMapping("/post/create")
     public String posting(Model model, PostSaveReqDto postSaveReqDto)
     {
         try
@@ -45,16 +42,12 @@ public class PostController
             model.addAttribute("errorMessage", e.getMessage());
             return "/post/post-create";
         }
-
     }
 
-    @PostMapping("/post/create")
-    public String posting(PostSaveReqDto postSaveReqDto)
+    @GetMapping("/post/create")
+    public String posting()
     {
-        System.out.println("컨트롤러: " + postSaveReqDto);
-//        return postService.posting(postSaveReqDto);
-        postService.posting(postSaveReqDto);
-        return "redirect:/posts";
+        return "/post/post-create";
     }
 
     @GetMapping("/posts")

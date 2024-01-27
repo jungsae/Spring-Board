@@ -52,7 +52,7 @@ public class PostService
         Author author = authorRepository.findByEmail(postSaveReqDto.getEmail()).orElse(null);
         LocalDateTime localDateTime = null;
         String appointment;
-//        System.out.println("check: "+postSaveReqDto);
+        System.out.println("check: "+postSaveReqDto);
 
         if (postSaveReqDto.getAppointment().equals("Y"))
         {
