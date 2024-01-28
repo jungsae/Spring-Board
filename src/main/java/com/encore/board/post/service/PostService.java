@@ -52,11 +52,11 @@ public class PostService
         Author author = authorRepository.findByEmail(postSaveReqDto.getEmail()).orElse(null);
         LocalDateTime localDateTime = null;
         String appointment;
-        System.out.println("check: "+postSaveReqDto);
+        if (postSaveReqDto.getAppointment() == null) postSaveReqDto.setAppointment("N");
+        System.out.println("check1: "+postSaveReqDto);
 
         if (postSaveReqDto.getAppointment().equals("Y"))
         {
-            appointment="Y";
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyy-MM-dd'T'HH:mm");
             localDateTime = LocalDateTime.parse(postSaveReqDto.getAppointmentTime(), dateTimeFormatter);
             LocalDateTime now = LocalDateTime.now();
@@ -64,19 +64,16 @@ public class PostService
             {
                 throw new IllegalArgumentException("시간정보 잘못입력");
             }
-        }else
-        {
-            appointment = "N";
         }
 
         Post post = Post.builder()
                         .title(postSaveReqDto.getTitle())
                         .contents(postSaveReqDto.getContents())
                         .author(author)
-                        .appointment(appointment)
+                        .appointment(postSaveReqDto.getAppointment())
                         .appointmentTime(localDateTime)
                         .build();
-        System.out.println("check: " + post);
+        System.out.println("check2: " + post);
 //        더티체킹 테스트
 //        author.updateAuthor("dirty checking test", "1234");
         postRepository.save(post);
