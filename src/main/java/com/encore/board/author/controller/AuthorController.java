@@ -5,6 +5,7 @@ import com.encore.board.author.dto.AuthorDetailResDto;
 import com.encore.board.author.dto.AuthorSaveReqDto;
 import com.encore.board.author.dto.AuthorUpdateRequestDto;
 import com.encore.board.author.service.AuthorService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
+@Slf4j
 public class AuthorController
 {
     private final AuthorService authorService;
@@ -50,6 +52,7 @@ public class AuthorController
         }catch(IllegalArgumentException e)
         {
             model.addAttribute("errorMessage", e.getMessage());
+            log.error(e.getMessage());
             return "/author/author-create";
         }
     }
