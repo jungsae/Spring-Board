@@ -47,9 +47,11 @@ public class PostService
         return postDetailResDto;
     }
 
-    public void posting(PostSaveReqDto postSaveReqDto)
+    public void posting(PostSaveReqDto postSaveReqDto, String email)
     {
-        Author author = authorRepository.findByEmail(postSaveReqDto.getEmail()).orElse(null);
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String email = authentication.getName();
+        Author author = authorRepository.findByEmail(email).orElse(null);
         LocalDateTime localDateTime = null;
         String appointment;
         if (postSaveReqDto.getAppointment() == null) postSaveReqDto.setAppointment("N");

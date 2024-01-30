@@ -7,6 +7,7 @@ import com.encore.board.author.dto.AuthorUpdateRequestDto;
 import com.encore.board.author.service.AuthorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,13 @@ public class AuthorController
     {
         return "home";
     }
+    @GetMapping("/author/login-page")
+    public String authorLogin()
+    {
+        return "author/login-page";
+    }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/author/list")
     public String authors(Model model)
     {

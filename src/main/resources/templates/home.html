@@ -28,6 +28,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-<div th:replace="header :: headerFragment"></div>
+    <div th:replace="header :: headerFragment"></div>
+    <span th:text="${session.email != null} ? ${session.email} + '님 반갑습니다.' : ''"></span>
 </body>
 </html>

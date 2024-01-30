@@ -8,21 +8,26 @@ import com.encore.board.author.dto.AuthorSaveReqDto;
 import com.encore.board.author.dto.AuthorUpdateRequestDto;
 import com.encore.board.author.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class AuthorService
 {
     private final AuthorRepository authorRepository;
+    private final PasswordEncoder passwordEncoder;
     @Autowired
-    public AuthorService(AuthorRepository authorRepository)
+    public AuthorService(AuthorRepository authorRepository, PasswordEncoder passwordEncoder)
     {
         this.authorRepository = authorRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public void saveReqDto(AuthorSaveReqDto authorSaveReqDto) throws IllegalArgumentException
@@ -38,10 +43,9 @@ public class AuthorService
         Author author = Author.builder()
                 .name(authorSaveReqDto.getName())
                 .email(authorSaveReqDto.getEmail())
-                .password(authorSaveReqDto.getPassword())
+                .password(passwordEncoder.encode(authorSaveReqDto.getPassword()))
                 .role(role)
                 .build();
-
         authorRepository.save(author);
     }
 
@@ -65,6 +69,10 @@ public class AuthorService
     public Author author(Long id) throws EntityNotFoundException
     {
         return authorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("없는 사람."));
+    }
+    public Author findByEmail(String email) throws EntityNotFoundException
+    {
+        return authorRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException("없는 사람."));
     }
 
     public AuthorDetailResDto findAuthorDetail(Long id) throws EntityNotFoundException
@@ -100,4 +108,5 @@ public class AuthorService
     {
         authorRepository.delete(authorRepository.findById(id).orElseThrow(EntityNotFoundException::new));
     }
+
 }

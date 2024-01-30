@@ -12,7 +12,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @Slf4j
@@ -34,11 +39,13 @@ public class PostController
     }
 
     @PostMapping("/post/create")
-    public String posting(Model model, PostSaveReqDto postSaveReqDto)
+    public String posting(Model model, PostSaveReqDto postSaveReqDto, HttpSession httpSession)
     {
         try
         {
-            postService.posting(postSaveReqDto);
+//            HttpServletRequest req를 매개변수에 주입한 뒤에
+//            HttpSession session = req.getSession(); 세션값을 꺼내어 getAttribute("email")
+            postService.posting(postSaveReqDto, httpSession.getAttribute("email").toString());
             return "redirect:/posts";
         }catch(IllegalArgumentException e){
             model.addAttribute("errorMessage", e.getMessage());
